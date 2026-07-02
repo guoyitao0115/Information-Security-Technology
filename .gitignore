@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+tmp/
+tmp_paper.pdf
+郭翊涛、贠湘楠+22308043、20337264+信息安全技术期末考查.zip

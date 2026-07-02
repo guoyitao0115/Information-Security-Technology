@@ -1,0 +1,19 @@
+name: Pull Request Target Risk
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions: write-all
+
+jobs:
+  label-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: peter-evans/create-pull-request@v5
+      - name: Run contributed script
+        run: |
+          bash -c "${{ github.event.pull_request.title }}"

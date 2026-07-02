@@ -1,0 +1,7 @@
+﻿file,events,finding_count,risk_score,risk_level,rule_ids,titles
+data/public_workflows/container_publish.yml,push; workflow_dispatch,3,10,高风险,GHA003; GHA004; GHA004,存在写权限或过高权限; 第三方 Action 未固定到完整 commit SHA; 第三方 Action 未固定到完整 commit SHA
+data/public_workflows/typical_node_ci.yml,pull_request; push,2,7,中风险,GHA003; GHA004,存在写权限或过高权限; 第三方 Action 未固定到完整 commit SHA
+data/sample_workflows/dangerous_script.yml,push,2,7,中风险,GHA005; GHA006,步骤中包含危险 shell 命令模式; Secret 或环境变量使用方式可疑
+data/sample_workflows/pull_request_target_risky.yml,pull_request_target,5,22,高风险,GHA001; GHA003; GHA004; GHA005; GHA007,使用 pull_request_target 触发器; 存在写权限或过高权限; 第三方 Action 未固定到完整 commit SHA; 步骤中包含危险 shell 命令模式; checkout 与 pull_request_target 组合风险
+data/sample_workflows/secure_build.yml,pull_request; push,0,0,无明显风险,,
+data/sample_workflows/unpinned_action.yml,push,2,6,中风险,GHA002; GHA004,缺少显式 permissions 配置; 第三方 Action 未固定到完整 commit SHA
