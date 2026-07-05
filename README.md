@@ -26,11 +26,12 @@
 ```text
 .
 ├── data/                  # 实验 workflow 样例
-├── docs/                  # 实施方案和最终报告
 ├── results/               # JSON、CSV 和图表结果
 ├── screenshots/           # 代码运行截图
 ├── src/                   # 扫描器源码
 ├── tools/                 # 报告和截图生成脚本
+├── 信息安全技术期末报告.md
+├── 信息安全技术期末报告.pdf
 ├── requirements.txt
 └── README.md
 ```
@@ -56,13 +57,5 @@ python3 -m venv .venv
 - `results/figures/risk_distribution.png`：风险类型分布图
 - `results/figures/risk_scores.png`：不同 workflow 风险评分对比图
 - `results/figures/rule_weights.png`：规则权重表
-- `docs/信息安全技术期末报告.md`：课程报告 Markdown 版本
-- `docs/信息安全技术期末报告.pdf`：课程报告 PDF 版本
-
-## 提交建议
-
-按课程要求，可将课程报告、代码、README、实验数据、图表和运行截图一起打包，压缩包命名为：
-
-```text
-郭翊涛、贠湘楠+22308043、20337264+信息安全技术期末考查.zip
-```
+- `信息安全技术期末报告.md`：课程报告 Markdown 版本
+- `信息安全技术期末报告.pdf`：课程报告 PDF 版本
