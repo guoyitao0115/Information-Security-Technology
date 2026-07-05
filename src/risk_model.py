@@ -1,4 +1,4 @@
-"""Risk weights and scoring helpers for GitHub Actions workflow findings."""
+# GitHub Actions workflow 风险发现的权重和评分辅助函数。
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class RuleMeta:
+    # 检测、评分和修复建议共同使用的规则元数据。
     rule_id: str
     title: str
     severity: str
@@ -14,6 +15,7 @@ class RuleMeta:
     recommendation: str
 
 
+# 权重表示审计优先级：组合攻击链和高权限上下文高于单点格式问题。
 RULES: dict[str, RuleMeta] = {
     "GHA001": RuleMeta(
         "GHA001",
@@ -68,6 +70,7 @@ RULES: dict[str, RuleMeta] = {
 
 
 def score_to_level(score: int) -> str:
+    # 把数值评分转换为报告中的风险等级文字。
     if score >= 8:
         return "高风险"
     if score >= 4:
@@ -78,4 +81,5 @@ def score_to_level(score: int) -> str:
 
 
 def score_findings(rule_ids: list[str]) -> int:
+    # 累加规则权重；忽略未知规则编号，避免异常数据中断输出。
     return sum(RULES[rule_id].weight for rule_id in rule_ids if rule_id in RULES)
