@@ -27,9 +27,7 @@
 .
 ├── data/                  # 实验 workflow 样例
 ├── results/               # JSON、CSV 和图表结果
-├── screenshots/           # 代码运行截图
 ├── src/                   # 扫描器源码
-├── tools/                 # 报告和截图生成脚本
 ├── 信息安全技术期末报告.md
 ├── 信息安全技术期末报告.pdf
 ├── requirements.txt
@@ -42,12 +40,6 @@
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python src/scanner.py data --json results/scan_results.json --csv results/scan_summary.csv --figures results/figures
-```
-
-生成最终报告：
-
-```bash
-.venv/bin/python tools/generate_report.py
 ```
 
 ## 输出文件
