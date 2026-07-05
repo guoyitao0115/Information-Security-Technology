@@ -30,6 +30,7 @@ MD_PATH = ROOT / "信息安全技术期末报告.md"
 PDF_PATH = ROOT / "信息安全技术期末报告.pdf"
 FIG_DIR = ROOT / "results" / "figures"
 FONT_NAME = "SimSun"
+BOLD_FONT_NAME = "SimSun-Bold"
 FONT_CANDIDATES = [
     Path(r"C:\Windows\Fonts\simsun.ttc"),
     Path(r"C:\Windows\Fonts\NotoSerifSC-VF.ttf"),
@@ -37,6 +38,15 @@ FONT_CANDIDATES = [
     Path("/System/Library/Fonts/PingFang.ttc"),
     Path("/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc"),
     Path("/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc"),
+]
+BOLD_FONT_CANDIDATES = [
+    Path(r"C:\Windows\Fonts\simhei.ttf"),
+    Path(r"C:\Windows\Fonts\msyhbd.ttc"),
+    Path(r"C:\Windows\Fonts\simsunb.ttf"),
+    Path(r"C:\Windows\Fonts\NotoSansSC-VF.ttf"),
+    Path("/System/Library/Fonts/PingFang.ttc"),
+    Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc"),
+    Path("/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc"),
 ]
 
 
@@ -249,10 +259,20 @@ def resolve_font_path() -> Path:
     raise FileNotFoundError("未找到可嵌入的中文字体，请安装宋体、苹方或 Noto CJK 字体后重新生成 PDF。")
 
 
+def resolve_bold_font_path() -> Path:
+    for path in BOLD_FONT_CANDIDATES:
+        if path.exists():
+            return path
+    return resolve_font_path()
+
+
 def make_styles():
     font_path = resolve_font_path()
+    bold_font_path = resolve_bold_font_path()
     if FONT_NAME not in pdfmetrics.getRegisteredFontNames():
         pdfmetrics.registerFont(TTFont(FONT_NAME, str(font_path)))
+    if BOLD_FONT_NAME not in pdfmetrics.getRegisteredFontNames():
+        pdfmetrics.registerFont(TTFont(BOLD_FONT_NAME, str(bold_font_path)))
     if "STSong-Light" not in pdfmetrics.getRegisteredFontNames():
         pdfmetrics.registerFont(TTFont("STSong-Light", str(font_path)))
     styles = getSampleStyleSheet()
@@ -260,22 +280,22 @@ def make_styles():
         ParagraphStyle(
             name="ChineseTitle",
             parent=styles["Title"],
-            fontName=FONT_NAME,
-            fontSize=16,
-            leading=24,
+            fontName=BOLD_FONT_NAME,
+            fontSize=14,
+            leading=16.8,
             alignment=TA_CENTER,
-            spaceAfter=16,
+            spaceAfter=10,
         )
     )
     styles.add(
         ParagraphStyle(
             name="ChineseHeading",
             parent=styles["Heading2"],
-            fontName=FONT_NAME,
+            fontName=BOLD_FONT_NAME,
             fontSize=14,
-            leading=20,
-            spaceBefore=12,
-            spaceAfter=8,
+            leading=16.8,
+            spaceBefore=8,
+            spaceAfter=4,
         )
     )
     styles.add(
@@ -284,11 +304,11 @@ def make_styles():
             parent=styles["BodyText"],
             fontName=FONT_NAME,
             fontSize=10.5,
-            leading=16,
+            leading=12.6,
             firstLineIndent=21,
             alignment=TA_JUSTIFY,
             wordWrap="CJK",
-            spaceAfter=6,
+            spaceAfter=3,
         )
     )
     styles.add(
